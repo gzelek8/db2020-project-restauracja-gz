@@ -6,16 +6,17 @@ Moduł który zawiera funkcje służace do nawigacji w aplikacji , oraz tworząc
 import tkinter as tk
 from tkinter import messagebox
 
-from src.app import admin_panel, order, reservation
+from src.app import admin_panel, order, reservation, kitchen
 from src.sql import sql_query
 
 
-def show_order_window(menu_window):
+def show_order_window(menu_window, login):
     """Funkcja która uruchamia moduł order.
      Argument:
-        @menu_window(tk.Toplevel)"""
+        @menu_window(tk.Toplevel)
+        #login(string)"""
     menu_window.withdraw()
-    order.show_menu_window()
+    order.show_menu_window(login)
     menu_window.update()
     menu_window.deiconify()
 
@@ -54,18 +55,22 @@ def show_menu(login):
 
     # Buttons
     orders_button = tk.Button(menu_window, text='Orders', padx=100, pady=10,
-                              command=lambda: show_order_window(menu_window))
+                              command=lambda: show_order_window(menu_window, login))
     orders_button.grid(row=1, column=0, sticky="ew")
 
     reservations_button = tk.Button(menu_window, text='Reservations', padx=100, pady=10,
                                     command=lambda: reservation.calendar(login))
     reservations_button.grid(row=2, column=0, sticky="ew")
 
+    actual_orders_button = tk.Button(menu_window, text='Actual orders', padx=100, pady=10,
+                                     command=kitchen.show_orders)
+    actual_orders_button.grid(row=3, column=0, sticky="ew")
+
     log_out_button = tk.Button(menu_window, text='Log out', padx=100, pady=10, command=lambda: log_out(menu_window))
-    log_out_button.grid(row=3, column=0, sticky="ew")
+    log_out_button.grid(row=4, column=0, sticky="ew")
 
     exit_button = tk.Button(menu_window, text='Exit', padx=100, pady=10, command=exit_program)
-    exit_button.grid(row=4, column=0, sticky="ew")
+    exit_button.grid(row=5, column=0, sticky="ew")
     menu_window.grid_rowconfigure(0, weight=1)
     menu_window.grid_columnconfigure(0, weight=1)
 

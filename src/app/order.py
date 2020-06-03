@@ -10,14 +10,11 @@ from tkinter import messagebox
 from src.sql import sql_query
 
 
-def show_menu_window():
-    """Funkcja tworząca moduł zamówienia"""
+def show_menu_window(actual_worker):
+    """Funkcja tworząca moduł zamówienia
+        @actual_worker(string)"""
 
     # FUNCTIONS:
-
-    def make_an_order(list_of_product):
-        """funckja przekazująca zapytanie z do bazy danych o utworzenie zamówienia
-            @argument lsit_of_product(list)"""
 
     def check_checkbutton_value():
         """Funkcja sprawdzająca status checkboxes"""
@@ -269,6 +266,19 @@ def show_menu_window():
         calculate_cost_of_order()
 
         receipt_text.insert(tk.END, "Total Cost:\t\t\t\t\t" + total_cost.get() + "\n")
+
+    def make_an_order(list_of_product):
+        """funckja przekazująca zapytanie z do bazy danych o utworzenie zamówienia
+            @argument lsit_of_product(list)"""
+        id_worker = sql_query.get_id_actual_employee(actual_worker)
+        table_id = sql_query.get_free_table(tables_var.get())
+        if discount_variable.get() == 1:
+            discount = 'Y'
+        else:
+            discount = 'N'
+        sql_query.add_order_to_database(list_of_product, id_worker[0][0], table_id[0][0], discount)
+        reset_actual_order()
+        messagebox.showinfo("Success", "Added order")
 
     def make_list_of_product_to_order():
         """Funckcja która odczytuje ile i jakich produktów zostało zamówionnych a
@@ -616,6 +626,18 @@ def show_menu_window():
                            state=tk.DISABLED,
                            textvariable=rings_entry_var)
     rings_entry.grid(row=2, column=1)
+
+    # Choose table
+    tables_var = tk.IntVar()
+    tables_text = tk.Label(menu_frame, font=('arial', 10), text="How many people?")
+    tables_text.grid(row=4, column=0)
+    scale = tk.Scale(menu_frame, orient='horizontal', variable=tables_var, from_=1, to=6)
+    scale.grid(row=5, column=0)
+
+    # Discount
+    discount_variable = tk.IntVar()
+    discount_button = tk.Checkbutton(menu_frame, text="Discount", variable=discount_variable, onvalue=1, offvalue=0)
+    discount_button.grid(row=5, column=1)
 
     # receipt frame
     receipt_frame = tk.Frame(main_receipt_frame, bd=5, relief=tk.RAISED)

@@ -381,3 +381,55 @@ def get_price_of_product():
     # Close Connection
     conn.close()
     return price
+
+
+def add_order_to_database(product_list, worker_id, table_id, discount):
+    """Funkcja dodająca zamówienie do bazy danych
+        @argument: product_list(list)"""
+    # create database
+    conn = sqlite3.connect('workers_db.db')
+    # create cursor
+    cur = conn.cursor()
+
+    cur.execute("INSERT INTO orders VALUES (Null, :table_id,  :discount, :worker_id)",
+                {
+                    'table_id': table_id,
+                    'discount': discount,
+                    'worker_id': worker_id,
+                })
+    # Commit Changes
+    conn.commit()
+    cur.execute("""SELECT last_insert_rowid()""")
+    order_id = cur.fetchall()
+    order_id = order_id[0][0]
+
+    for product in product_list:
+        cur.execute("INSERT INTO product_order VALUES ( :amount, :order_id, :name)",
+                    {
+                        'amount': product[1],
+                        'order_id': order_id,
+                        'name': product[0],
+
+                    })
+        # Commit Changes
+        conn.commit()
+
+    # Close Connection
+    conn.close()
+
+
+def get_all_order():
+    """Funkcja zwracająca listę z wszystkimi aktualnymi zamówieniami """
+    # create database
+    conn = sqlite3.connect('workers_db.db')
+    # create cursor
+    cur = conn.cursor()
+    cur.execute(f"""select order_id, name, amount from product_order
+                    order by order_id;""")
+    active_orders = cur.fetchall()
+    # Commit Changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()
+    return active_orders
