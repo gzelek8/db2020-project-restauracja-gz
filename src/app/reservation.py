@@ -77,7 +77,7 @@ def calendar(actual_worker):
         """Funkcja służaca do usunięcia rezerwacji z systemu"""
 
         def cancel_reservation():
-            """funkcja która po wcisnieciu przycisku zamyka okno aplikacji"""
+            """funkcja która usuwa zaznaczone rezerwacje z kalendarza"""
             index_of_reservation = list_of_reservation.curselection()
             list_of_reservation_to_delete = []
             if index_of_reservation:

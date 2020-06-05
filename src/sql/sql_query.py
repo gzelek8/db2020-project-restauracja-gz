@@ -221,6 +221,28 @@ def get_id_actual_employee(login):
     return actual_employee
 
 
+def get_role_actual_employee(login):
+    """Funkcja która zwraca role  użytkownika o przesłanym w argumencie loginie
+            Argument:
+                @login(string)
+            Return:
+                @actual_employee(character)"""
+    # create database
+    conn = sqlite3.connect('workers_db.db')
+    # create cursor
+    cur = conn.cursor()
+
+    cur.execute(f"""SELECT role FROM workers WHERE login='{login}'""")
+    actual_employee = cur.fetchall()
+    # Commit Changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()
+
+    return actual_employee
+
+
 def add_reservation_to_database(number_of_people, date, worker_id, first_name, last_name):
     """Funkcja która dodaje rezerwacje do bazy danych
         Argumenty:
@@ -433,3 +455,19 @@ def get_all_order():
     # Close Connection
     conn.close()
     return active_orders
+
+
+def delete_orders_from_database(order_id):
+    """Funkcja usuwająca zamówienie od podanym id z bazy danych
+        @Argumnety: oderd_id(int)"""
+    # create database
+    conn = sqlite3.connect('workers_db.db')
+    # create cursor
+    cur = conn.cursor()
+    cur.execute(f"""DELETE FROM product_order
+                    where order_id={order_id}""")
+    # Commit Changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()

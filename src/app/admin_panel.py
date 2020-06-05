@@ -9,8 +9,18 @@ from src.app import var
 from src.sql import sql_query
 
 
-def open_admin_menu():
-    """Funkcja tworząca panel do logowania dla administratora"""
+def open_admin_menu(login_window):
+    """Funkcja tworząca panel do logowania dla administratora
+        @Argumenty:
+                    login_window(tk.Tk)"""
+
+    def log_out():
+        """Funkcja służąca do wylogowania aktualnego użytkownika"""
+        logout_var = messagebox.askyesno("Logout", "Logout?")
+        if logout_var > 0:
+            login_window.update()
+            login_window.deiconify()
+            admin_menu.destroy()
 
     def add_user():
         """Funkcja ,dzięki której można dodać użytkownika do aplikacji"""
@@ -95,7 +105,7 @@ def open_admin_menu():
         # Buttons
         add_user_button = tk.Button(admin_menu, text="Add User", fg="black", command=add_user)
         delete_user_button = tk.Button(admin_menu, text="Delete User", fg="black", command=delete_user)
-        back_button = tk.Button(admin_menu, text="Back", fg='black', command=lambda: admin_menu.destroy())
+        back_button = tk.Button(admin_menu, text="Back", fg='black', command=log_out)
         add_user_button.grid(row=1, column=0)
         delete_user_button.grid(row=2, column=0)
         back_button.grid(row=3, column=0)

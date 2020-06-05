@@ -21,6 +21,25 @@ def show_order_window(menu_window, login):
     menu_window.deiconify()
 
 
+def show_kitchen_window(login_window, login):
+    """Funkcja która uruchamia moduł kitchen.
+     Argument:
+        @menu_window(tk.Toplevel)
+        #login(string)"""
+    kitchen.show_orders(login_window)
+
+
+def show_admin_window(menu_window, login):
+    """Funkcja która uruchamia moduł admin.
+     Argument:
+        @menu_window(tk.Toplevel)
+        #login(string)"""
+    menu_window.withdraw()
+    admin_panel.open_admin_menu()
+    menu_window.update()
+    menu_window.deiconify()
+
+
 def log_out(menu_window):
     """Funkcja służąca do wylogowania aktualnego użytkownika
     Argument:
@@ -62,15 +81,11 @@ def show_menu(login):
                                     command=lambda: reservation.calendar(login))
     reservations_button.grid(row=2, column=0, sticky="ew")
 
-    actual_orders_button = tk.Button(menu_window, text='Actual orders', padx=100, pady=10,
-                                     command=kitchen.show_orders)
-    actual_orders_button.grid(row=3, column=0, sticky="ew")
-
     log_out_button = tk.Button(menu_window, text='Log out', padx=100, pady=10, command=lambda: log_out(menu_window))
-    log_out_button.grid(row=4, column=0, sticky="ew")
+    log_out_button.grid(row=3, column=0, sticky="ew")
 
     exit_button = tk.Button(menu_window, text='Exit', padx=100, pady=10, command=exit_program)
-    exit_button.grid(row=5, column=0, sticky="ew")
+    exit_button.grid(row=4, column=0, sticky="ew")
     menu_window.grid_rowconfigure(0, weight=1)
     menu_window.grid_columnconfigure(0, weight=1)
 
@@ -86,7 +101,14 @@ def check_login(login, password):
         input_name.delete(0, 'end')
         input_password.delete(0, 'end')
         login_window.withdraw()
-        show_menu(login)
+        worker_role = sql_query.get_role_actual_employee(login)
+        worker_role = worker_role[0][0]
+        if worker_role == 'K':
+            show_kitchen_window(login_window, login)
+        elif worker_role == 'M':
+            show_admin_window(login_window, login)
+        else:
+            show_menu(login)
 
     else:
         messagebox.showerror("Wrong login or password", "Error")
@@ -119,13 +141,12 @@ input_password.grid(row=2, column=1)
 login_button = tk.Button(login_window, text="Login",
                          command=lambda: check_login(input_name.get(), input_password.get()))
 login_button.grid(row=1, column=3, rowspan=2, padx=15, pady=5)
-
+exit_button = tk.Button(login_window, text="Exit",
+                        command=lambda: login_window.destroy())
+exit_button.grid(row=4, column=3, rowspan=2, padx=15, pady=5)
 # menubar
 menubar = tk.Menu(login_window)
 add_user = tk.Menu(menubar, tearoff=0)
-
-add_user.add_command(label="Admin", command=admin_panel.open_admin_menu)
-menubar.add_cascade(label="Menu", menu=add_user)
 
 login_window.config(menu=menubar)
 login_window.mainloop()
