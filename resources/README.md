@@ -58,7 +58,7 @@ INSERT INTO reservation VALUES (Null, :amount_of_people, :data,  :worker_id, :fi
 
 10. Zwracanie rezerwacji o podanych argumentach.
 ```
-SELECT reservation_id from reservation
+SELECT reservation_id FROM reservation
                     WHERE number_of_people = {number_of_people} AND first_name = '{first_name}' AND last_name = '{last_name}'
 ```
 
