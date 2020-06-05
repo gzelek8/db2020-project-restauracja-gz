@@ -9,10 +9,11 @@ from src.app import var
 from src.sql import sql_query
 
 
-def open_admin_menu(login_window):
+def open_admin_menu(login_window, login):
     """Funkcja tworząca panel do logowania dla administratora
         @Argumenty:
-                    login_window(tk.Tk)"""
+                    login_window(tk.Tk)
+                    login(string)"""
 
     def log_out():
         """Funkcja służąca do wylogowania aktualnego użytkownika"""
@@ -101,14 +102,17 @@ def open_admin_menu(login_window):
         """Funckja która po pomyślnym zalogowaniu się administratora wyświetla panel z dostępnymi opcjami"""
         for widget in admin_menu.winfo_children():
             widget.destroy()
-
+        # Actual worker:
+        personality_actual_employee = sql_query.get_name_actual_employee(login)
+        actual_employee = tk.Label(admin_menu, text="Now working: " + personality_actual_employee)
+        actual_employee.grid(row=0, column=0)
         # Buttons
         add_user_button = tk.Button(admin_menu, text="Add User", fg="black", command=add_user)
         delete_user_button = tk.Button(admin_menu, text="Delete User", fg="black", command=delete_user)
         back_button = tk.Button(admin_menu, text="Back", fg='black', command=log_out)
-        add_user_button.grid(row=1, column=0)
-        delete_user_button.grid(row=2, column=0)
-        back_button.grid(row=3, column=0)
+        add_user_button.grid(row=2, column=0)
+        delete_user_button.grid(row=3, column=0)
+        back_button.grid(row=4, column=0)
 
         # List of users -  pole tekstowe wyświetlające aktualnych użytkowników
         list_of_users = sql_query.create_list_of_users()
@@ -117,7 +121,7 @@ def open_admin_menu(login_window):
         for user in list_of_users:
             list_of_users_text.insert(tk.END, user[1] + '\t' + user[2] + '\t' + user[3] + '\t' + user[4] + '\t' + user[
                 5] + '\n')
-        list_of_users_text.grid(row=0, column=0)
+        list_of_users_text.grid(row=1, column=0)
         list_of_users_text.configure(state='disabled')
 
     def check_admin_password():

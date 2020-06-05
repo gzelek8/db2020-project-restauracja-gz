@@ -26,18 +26,15 @@ def show_kitchen_window(login_window, login):
      Argument:
         @menu_window(tk.Toplevel)
         #login(string)"""
-    kitchen.show_orders(login_window)
+    kitchen.show_orders(login_window, login)
 
 
-def show_admin_window(menu_window, login):
+def show_admin_window(login_window, login):
     """Funkcja która uruchamia moduł admin.
      Argument:
         @menu_window(tk.Toplevel)
         #login(string)"""
-    menu_window.withdraw()
-    admin_panel.open_admin_menu()
-    menu_window.update()
-    menu_window.deiconify()
+    admin_panel.open_admin_menu(login_window, login)
 
 
 def log_out(menu_window):

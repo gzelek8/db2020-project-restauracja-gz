@@ -4,10 +4,11 @@ from tkinter import messagebox
 from src.sql import sql_query
 
 
-def show_orders(login_window):
+def show_orders(login_window, login):
     """Funckja wyświetlająca aktualne zamówienia znajdujące się w bazie dnaych
         @Argumenty:
-                    login_window(tk.TK)"""
+                    login_window(tk.TK)
+                    login(string)"""
 
     def log_out():
         """Funkcja służąca do wylogowania aktualnego użytkownika"""
@@ -54,13 +55,17 @@ def show_orders(login_window):
             if order[0] == index:
                 temporary_list_of_orders.append(f" {order[1]} - ({order[2]}) ")
         finally_list_of_orders.append(temporary_list_of_orders)
+    # Actual worker
+    personality_actual_employee = sql_query.get_name_actual_employee(login)
+    actual_employee = tk.Label(order_menu, text="Now working: " + personality_actual_employee)
+    actual_employee.grid(row=0, column=0)
     # List of actual orders
     list_of_orders_listbox = tk.Listbox(order_menu, selectmode='single', width=200)
-    tk.Button(order_menu, text="Ready", command=update_status_of_orders).grid(row=1, columnspan=2)
+    tk.Button(order_menu, text="Ready", command=update_status_of_orders).grid(row=2, columnspan=2)
     for counter, order in enumerate(finally_list_of_orders):
         list_of_orders_listbox.insert(counter, ''.join(map(str, order)))
-    list_of_orders_listbox.grid(row=0, column=0)
+    list_of_orders_listbox.grid(row=1, column=0)
     log_out_button = tk.Button(order_menu, text="Log out", command=log_out)
-    log_out_button.grid(row=2, column=0)
+    log_out_button.grid(row=3, column=0)
 
     order_menu.mainloop()
