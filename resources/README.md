@@ -132,9 +132,14 @@ Po otworzeniu aplikacji widzimy okno logowania, w którym możemy zalogować si�
 Jako pracownik możemy dokonać wtedy rezerwacji stolika w danym terminie, na daną ilość osób, na podane przez klienta nazwisko, jeżeli stolik o takiej wielkości w danym terminie jest dostępny lub usunąć taką rezerwację. 
 Kolejną opcją jest wpisanie do systemu złożonego przez klienta zamówienia, podsumowywując przy tym jego koszt oraz usunięcie takiego zamówienia.
 Logując się jako kierownik restauracji mamy do wyboru dodatkowe opcją pozwalające zarządzać personelem, takie jak wyświetlanie listy pracowników, dodawanie czy usuwanie ich z bazy.
+#### Przykładowe dane logowania:
+| LOGIN |    HASŁO    | STANOWISKO |
+|:-----:|:-----------:|:----------:|
+|  azar | ziemniaczki |  kierownik |
+|  dzar | ziemniaczki |  pracownik |
 
-### Przykładowe funkcje użyte w aplikacji
-#### Obsługa rezerwacji.
+### Przykładowe funkcje użyte w aplikacji:
+#### Obsługa rezerwacji:
 
 1. Funkcja umożliwiająca dodanie rezerwacji do bazy.
 ```
