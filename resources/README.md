@@ -7,7 +7,7 @@ Tematem naszego projektu jest utworzenie bazy danych oraz aplikacji, która moż
 |  Grzegorz Zelek |  WIMiIP |    IS    |    4    |   4   |    2019/2020   |
 
 ## Projekt bazy danych
-![alt]()
+![baza](https://github.com/phajder-databases/db2020-project-restauracja-gz/blob/master/resources/AGZ-RESTAURANT.svg)
 
 
 ## Implementacja zapytań SQL
