@@ -1,5 +1,5 @@
 # RESTAURACJA
-Tematem naszego projektu jest utowrzenie bazy danych oraz aplikacji, która może zostać wykorzystana przez pracowników do obsługi w restauracji. Aplikacja umożliwia tworzenie zamówień oraz ustawianie rezerwacji stolików w restauracji, a także zarządzanie personelem przez kierownika. Pracownicy w zależności od stanowiska mają różny dostęp do opcji aplikacji.
+Tematem naszego projektu jest utworzenie bazy danych oraz aplikacji, która może zostać wykorzystana przez pracowników do obsługi w restauracji. Aplikacja umożliwia tworzenie zamówień oraz ustawianie rezerwacji stolików w restauracji, a także zarządzanie personelem przez kierownika. Pracownicy w zależności od stanowiska mają różny dostęp do opcji aplikacji.
 
 | Nazwisko i imię | Wydział | Kierunek | Semestr | Grupa | Rok akademicki |
 |:---------------:|:-------:|:--------:|:-------:|:-----:|:--------------:|
