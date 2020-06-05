@@ -126,12 +126,12 @@ DELETE FROM product_order
 ```
 
 ## Aplikacja
-Aplikacja została napisana w języku python. Do pisanie aplikacji wykorzystano środowisko PyCharm. Do komunikacji z bazą danych wykorzystano sqlite3. Użyto dodatkowo dwóch bibliotek. Pierwszą z nich jest gui Trinkter, powszechnie stosowana biblioteka umożliwiająca utworzenie graficzengo interfesju naszej aplikacji. Kolejną jest tkcalendar która udostępnia widżety Kalendarz i DateEntry dla Tkintera.
+Aplikacja została napisana w języku Python. Do pisanie aplikacji wykorzystano środowisko PyCharm. Do komunikacji z bazą danych wykorzystano sqlite3. Użyto dodatkowo dwóch bibliotek. Pierwszą z nich jest gui Trinkter, powszechnie stosowana biblioteka umożliwiająca utworzenie graficzengo interfesju naszej aplikacji. Kolejną jest tkcalendar która udostępnia widżety Kalendarz i DateEntry dla Tkintera.
 
 Po otworzeniu aplikacji widzimy okno logowania, w którym możemy zalogować się jako jeden z użytkowników w bazie. 
-Jako pracownik możemy dokonać wtedy rezerwacji stolika w danym terminie, na daną ilość osób, na podane przez klienta nazwisko, jeżeli stolik o takiej wielkości w danym terminie jest dostępny. 
-Kolejną opcją jest wpisanie do systemu złożonego przez klienta zamówienia, podsumowywująć przy tym jego koszt.
-Logując się jako kierownik restauracji mamy do wyboru dodatkowe opcją pozwalające zarzązaćpersonelem, takie jak wyswietlanie listy pracowników, dodawanie czy usuwanie ich z bazy.
+Jako pracownik możemy dokonać wtedy rezerwacji stolika w danym terminie, na daną ilość osób, na podane przez klienta nazwisko, jeżeli stolik o takiej wielkości w danym terminie jest dostępny lub usunąć taką rezerwację. 
+Kolejną opcją jest wpisanie do systemu złożonego przez klienta zamówienia, podsumowywując przy tym jego koszt oraz usunięcie takiego zamówienia.
+Logując się jako kierownik restauracji mamy do wyboru dodatkowe opcją pozwalające zarządzać personelem, takie jak wyświetlanie listy pracowników, dodawanie czy usuwanie ich z bazy.
 
 ### Przykładowe funkcje użyte w aplikacji
 #### Obsługa rezerwacji.
